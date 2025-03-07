@@ -43,10 +43,38 @@ const colors = {
 }
 
 export function Horarios () {
+  function handleMouseEnter (event) {
+    const { target } = event
+    const hora = target.getAttribute('data-hora')
+    const color = target.getAttribute('data-color')
+    const keyframes = [
+      { background: 'transparent' },
+      { background: `${color}` },
+    ]
+    const horas = document.querySelectorAll(`span[data-hora='${hora}']`)
+    horas.forEach(hora => {
+      hora.animate(keyframes, { duration: 150, fill: 'forwards', easing: 'ease' })
+    })
+  }
+
+  function handleMouseLeave (event) {
+    const { target } = event
+    const hora = target.getAttribute('data-hora')
+    const color = target.getAttribute('data-color')
+    const keyframes = [
+      { background: `${color}` },
+      { background: 'transparent' },
+    ]
+    const horas = document.querySelectorAll(`span[data-hora='${hora}']`)
+    horas.forEach(hora => {
+      hora.animate(keyframes, { duration: 150, fill: 'forwards', easing: 'ease' })
+    })
+  }
+
   return (
     <dialog
       id='fullScreenPreview'
-      className='absolute backdrop-blur-lg min-w-[1280px] min-h-screen bg-[#1111] h-full w-full flex items-center justify-center'
+      className='absolute backdrop-blur-lg min-w-[1280px] min-h-screen bg-[#1111] h-full w-full flex justify-center'
     >
       <section className='h-fit w-full max-h-[600px] max-w-screen-xl min-w-screen-xl min-h-fit flex items-center justify-center overflow-auto bg-transparent'>
         <main id='horarios' className='w-full h-fit gap-1 bg-neutral-900 rounded-xl grid grid-cols-6 px-4 py-3 text-center [&>*:not(.recreo)]:h-10 [&>*:not(.recreo)]:w-full [&>*:not(.recreo)]:overflow-hidden [&>*:not(.recreo):not(.void)]:border [&>*:not(.recreo):not(.void)]:border-neutral-600 [&>*:not(.recreo)]:rounded-lg [&>*:not(.recreo)]:flex [&>*:not(.recreo)]:items-center [&>*:not(.recreo)]:justify-center'>
@@ -92,7 +120,11 @@ export function Horarios () {
                       '--color': `${colors[hora.hora]}`,
                       height: '100%'
                     }}
-                    className={`${hora.hora === '' ? 'void' : ''} h-full w-full text-base rounded-lg font-semibold hover:bg-[var(--color)] text-balance`}
+                    data-color={colors[hora.hora]}
+                    data-hora={hora.hora}
+                    className={`${hora.hora === '' ? 'void' : ''} h-full w-full text-base rounded-lg font-semibold text-balance`}
+                    onMouseEnter={handleMouseEnter}
+                    onMouseLeave={handleMouseLeave}
                   >
                     {hora.hora}
                   </span>

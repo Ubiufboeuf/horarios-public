@@ -14,7 +14,7 @@ import { Horarios } from '../Horarios'
 </body>
 </html>
 
-<style>
+<style is:global>
 	:root {
 		color-scheme: dark light;
 	}
@@ -23,5 +23,15 @@ import { Horarios } from '../Horarios'
 		height: 100%;
 		width: 100%;
 		margin: 0;
+	}
+
+	#fullScreenPreview {
+		align-items: center;
+	}
+
+	@media (height <= 476px) {
+		#fullScreenPreview {
+			align-items: start;
+		}
 	}
 </style>
