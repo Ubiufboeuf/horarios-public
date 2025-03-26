@@ -122,7 +122,7 @@ export function Horarios () {
                     }}
                     data-color={colors[hora.hora]}
                     data-hora={hora.hora}
-                    className={`${hora.hora === '' ? 'void' : ''} h-full w-full text-base rounded-lg font-semibold text-balance`}
+                    className={`${hora.hora === '' ? 'void' : ''} h-full w-full px-2 text-base rounded-lg font-semibold text-balance`}
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                   >
